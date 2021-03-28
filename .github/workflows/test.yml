@@ -38,12 +38,12 @@ jobs:
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t botkaca
           docker image ls
-          cat << EOF > app.json
+          cat << EOF > config.ini
           {
-            "API_ID": "${{ secrets.API_ID }}",
-            "API_HASH": "${{ secrets.API_HASH }}", 
-            "BOT_TOKEN": "${{ secrets.BOT_TOKEN }}", 
-            "PASSWORD": "${{ secrets.PASSWORD }}" 
+            "API_ID" = "${{ secrets.API_ID }}",
+            "API_HASH" = "${{ secrets.API_HASH }}", 
+            "BOT_TOKEN" = "${{ secrets.BOT_TOKEN }}", 
+            "PASSWORD" = "${{ secrets.PASSWORD }}" 
           }
           EOF
 
