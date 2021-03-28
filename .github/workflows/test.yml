@@ -1,0 +1,67 @@
+name: Botgram shell-bot Runner
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: 'README.md'
+  workflow_dispatch:
+
+env:
+  GitHubMail: "Raj9039852537@@gmail.com"
+  GitHubName: "Raj9039852537"
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set Git Configs & Secrets
+        run: |
+          git config --global user.email ${GitHubMail}
+          git config --global user.name ${GitHubName}
+          git config --global color.ui true
+          git config --global credential.helper store
+          echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+
+     - name: Clone -bot repo and Generate config
+        run: |
+          git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca
+          cd botkaca
+          cat << EOF > config.json
+          {
+            "API_ID": "${{ secrets.API_ID }}",
+            "API_HASH": ${{ API_HASH }}, 
+            "BOT_TOKEN": ${{ secrets.BOT_TOKEN }}, 
+            "PASSWORD": ${{ secrets.PASSWORD }} 
+          }
+          EOF
+  #    - name: Clone The Secret Mirror Repository
+   #     run: |
+    #      git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.SOURCE }} source
+      - name: Compile The Mirroring Docker Container
+        run: |
+          docker build -t botkaca botkaca
+    #      docker run -it botkaca 
+    #      cd source || exit 1
+    #      echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+    #      docker container prune --force || true
+    #      docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t personal
+    #      docker image ls
+
+      - name: running Docker
+        timeout-minutes: 330
+        continue-on-error: true
+        run: |
+           docker run -it botkaca
+        #  docker run --privileged --rm -i personal
+      - name: Workflow Looping
+        run: |
+          git clone https://github.com/${GITHUB_REPOSITORY} loop
+          cd loop || exit 1
+          echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looper.txt
+          git add looper.txt
+          git commit -m "Looping at $(date -u +%D-%T%P)"
+          git push -q https://github.com/${GITHUB_REPOSITORY} HEAD:main
