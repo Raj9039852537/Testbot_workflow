@@ -28,7 +28,7 @@ jobs:
       - name: Clone -bot repo and Generate config
         run: |
           git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca 
-          cd botkaca
+          cd botkaca/bot
           cat << EOF > config.ini
           [pyrogram] 
             API_ID = ${{ secrets.API_ID }}
