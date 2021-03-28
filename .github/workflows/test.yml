@@ -27,7 +27,16 @@ jobs:
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
       - name: Clone -bot repo and Generate config
         run: |
-          git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca    
+          git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca 
+          cd botkaca
+          cat << EOF > config.ini
+          {
+            "API_ID" = "${{ secrets.API_ID }}",
+            "API_HASH" = "${{ secrets.API_HASH }}", 
+            "BOT_TOKEN" = "${{ secrets.BOT_TOKEN }}", 
+            "PASSWORD" = "${{ secrets.PASSWORD }}" 
+          }
+          EOF   
   #    - name: Clone The Secret Mirror Repository
    #     run: |
     #      git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.SOURCE }} source
@@ -38,14 +47,6 @@ jobs:
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t botkaca
           docker image ls
-          cat << EOF > config.ini
-          {
-            "API_ID" = "${{ secrets.API_ID }}",
-            "API_HASH" = "${{ secrets.API_HASH }}", 
-            "BOT_TOKEN" = "${{ secrets.BOT_TOKEN }}", 
-            "PASSWORD" = "${{ secrets.PASSWORD }}" 
-          }
-          EOF
 
       - name: running Docker
         timeout-minutes: 330
