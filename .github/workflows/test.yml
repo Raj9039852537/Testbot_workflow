@@ -24,6 +24,7 @@ jobs:
           git config --global user.name ${GitHubName}
           git config --global color.ui true
           git config --global credential.helper store
+          git config --global API_ID ${{ SECRETS.API_ID }} 
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
       - name: Clone -bot repo and Generate config
         run: |
