@@ -53,8 +53,8 @@ jobs:
         continue-on-error: true
         run: |
       #     docker run -i botkaca
-CMD ["python3", "-m", "bot"]
-#python3 -m bot;
+#CMD ["python3", "-m", "bot"]
+python3 -m bot;
         #  docker run --privileged --rm -i personal
       - name: Workflow Looping
         run: |
