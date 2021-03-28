@@ -42,13 +42,11 @@ jobs:
     #      git clone https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com/${{ secrets.SOURCE }} source
       - name: Compile The Mirroring Docker Container
         run: |
-          docker build -t botkaca botkaca
-    #      docker run -it botkaca 
-    #      cd source || exit 1
-    #      echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-    #      docker container prune --force || true
-    #      docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t personal
-    #      docker image ls
+          cd botkaca || exit 1
+          echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          docker container prune --force || true
+          docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t botkaca
+          docker image ls
 
       - name: running Docker
         timeout-minutes: 330
