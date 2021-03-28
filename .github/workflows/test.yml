@@ -25,7 +25,7 @@ jobs:
           git config --global color.ui true
           git config --global credential.helper store
           echo "https://${GitHubName}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
-     - name: Clone -bot repo and Generate config
+      - name: Clone -bot repo and Generate config
         run: |
           git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca
           cd botkaca
