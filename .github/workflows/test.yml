@@ -52,7 +52,6 @@ jobs:
         timeout-minutes: 330
         continue-on-error: true
         run: |
-      #     docker run -i botkaca
           docker run --privileged --rm -i botkaca/bot
       - name: Workflow Looping
         run: |
