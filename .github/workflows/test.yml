@@ -53,9 +53,7 @@ jobs:
         continue-on-error: true
         run: |
       #     docker run -i botkaca
-#CMD ["python3", "-m", "bot"]
-python3 -m bot;
-        #  docker run --privileged --rm -i personal
+          docker run --privileged --rm -i botkaca/bot
       - name: Workflow Looping
         run: |
           git clone https://github.com/${GITHUB_REPOSITORY} loop
