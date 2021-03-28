@@ -38,7 +38,6 @@ jobs:
           docker container prune --force || true
           docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t botkaca
           docker image ls
-         # cd botkaca
           cat << EOF > app.json
           {
             "API_ID": "${{ secrets.API_ID }}",
