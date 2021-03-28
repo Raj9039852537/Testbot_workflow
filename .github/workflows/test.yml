@@ -29,7 +29,7 @@ jobs:
         run: |
           git clone https://github.com/Raj9039852537/botkaca --depth 1 botkaca
           cd botkaca
-          cat << EOF > config.json
+          cat << EOF > app.json
           {
             "API_ID": "${{ secrets.API_ID }}",
             "API_HASH": "${{ secrets.API_HASH }}", 
