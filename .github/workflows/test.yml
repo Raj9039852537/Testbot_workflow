@@ -34,7 +34,10 @@ jobs:
           API_ID = ${{ secrets.API_ID }}
           API_HASH = ${{ secrets.API_HASH }}
           BOT_TOKEN = ${{ secrets.BOT_TOKEN }} 
-          PASSWORD = ${{ secrets.PASSWORD }}
+          BOT_PASSWORD = ${{ secrets.PASSWORD }} 
+          CHAT_ID = ${{ secrets.CHAT_ID }} 
+          UPLOAD_AS_DOC = 1
+          BAR_SIZE = 25
           EOF
   #    - name: Clone The Secret Mirror Repository
    #     run: |
