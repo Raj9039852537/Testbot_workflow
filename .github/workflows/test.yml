@@ -52,7 +52,7 @@ jobs:
         timeout-minutes: 330
         continue-on-error: true
         run: |
-          docker run --privileged --rm -i botkaca/bot
+          docker run --privileged --rm -i botkaca
       - name: Workflow Looping
         run: |
           git clone https://github.com/${GITHUB_REPOSITORY} loop
